@@ -4,7 +4,8 @@ import argparse
 
 def run_day(day, part, use_sample):
     suffix = '_sample' if use_sample else ''
-    filename = f'inputs/day_{day}_{part}{suffix}.txt'
+    # filename = f'inputs/day_{day}_{part}{suffix}.txt'
+    filename = f'inputs/day_{day}{suffix}.txt'
 
     modulename = f'day_{day}'
     day_module = __import__(modulename)
