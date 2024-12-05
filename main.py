@@ -25,7 +25,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run an Advent of Code 2024 day')
     parser.add_argument('day', type=int)
     parser.add_argument('part', type=int)
-    parser.add_argument('--sample', action='store_true')
+    parser.add_argument('-s', '--sample', action='store_true')
     args = parser.parse_args()
 
     run_day(args.day, args.part, args.sample)
