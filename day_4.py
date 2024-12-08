@@ -10,7 +10,7 @@ def part_one(file):
         for col in range(len(grid[row])):
             # Check all eight directions for a match
             total += word_matches(grid, "XMAS", row, col)
-    print(total)
+    return total
 
 
 def part_two(file):
@@ -23,7 +23,7 @@ def part_two(file):
         for col in range(len(grid[row])):
             # Check all eight directions for a match
             total += x_matches(grid, row, col)
-    print(total)
+    return total
 
 
 def x_matches(grid, row, col):

@@ -7,7 +7,7 @@ def part_one(file):
         matches = re.findall(r'mul\((\d{1,3}),(\d{1,3})\)', line, re.S | re.M)
         for match in matches:
             total += int(match[0])*int(match[1])
-    print(total)
+    return total
 
 def part_two(file):
     enabled = True
@@ -21,4 +21,4 @@ def part_two(file):
                 enabled = False
             elif enabled:
                 total += int(match[0])*int(match[1])
-    print(total)
+    return total

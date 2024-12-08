@@ -9,7 +9,7 @@ def part_one(file):
         if safe:
             totalsafe += 1
 
-    print(totalsafe)
+    return totalsafe
 
 def part_two(file):
     totalsafe = 0
@@ -26,7 +26,7 @@ def part_two(file):
                 if safe:
                     totalsafe += 1
                     break
-    print(totalsafe)
+    return totalsafe
 
 def test_levels(levels):
     increasing = None

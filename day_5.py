@@ -11,7 +11,7 @@ def part_one(file):
         if not broke_rule:
             middle_index = int((len(pages) - 1) / 2)
             total += int(pages[middle_index])
-    print(total)
+    return total
 
 
 def part_two(file):
@@ -24,7 +24,7 @@ def part_two(file):
             pages = reorder_pages(pages, rules)
             middle_index = int((len(pages) - 1) / 2)
             total += int(pages[middle_index])
-    print(total)
+    return total
 
 
 def reorder_pages(pages, rules):

@@ -22,7 +22,7 @@ def part_one(file):
     total = 0
     for line in maze:
         total += len(re.findall('X',line))
-    print(total)
+    return total
 
 def part_two(file):
     facing_row, facing_col = -1, 0
@@ -40,7 +40,7 @@ def part_two(file):
                 new_maze[row] = set_char(new_maze[row],col,'#')
                 if not solve_maze(new_maze, starting_row, starting_col, facing_row, facing_col):
                     total += 1
-    print(total)
+    return total
 
 
 def solve_maze(maze, row, col, facing_row, facing_col):
