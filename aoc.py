@@ -9,13 +9,50 @@ class Vector:
         self.row: int = row
         self.col: int = col
 
+    @staticmethod
+    def north():
+        return Vector(-1, 0)
+
+    @staticmethod
+    def east():
+        return Vector(0, 1)
+
+    @staticmethod
+    def south():
+        return Vector(1, 0)
+
+    @staticmethod
+    def west():
+        return Vector(0, -1)
+
+    @staticmethod
+    def turn_right(facing):
+        if facing == Vector.north():
+            return Vector.east()
+        elif facing == Vector.east():
+            return Vector.south()
+        elif facing == Vector.south():
+            return Vector.west()
+        else:
+            return Vector.north()
+
     def __add__(self, other):
         return Vector(self.row + other.row, self.col + other.col)
 
     def __sub__(self, other):
         return Vector(self.row - other.row, self.col - other.col)
+
     def __mul__(self, other):
-        return Vector(self.row*other, self.col*other)
+        return Vector(self.row * other, self.col * other)
+
+    def __eq__(self, other):
+        return self.row == other.row and self.col == other.col
+    def __str__(self):
+        return f'[{self.row},{self.col}]'
+    def __repr__(self):
+        return self.__str__()
+    def __hash__(self):
+        return hash((self.row,self.col))
 
 
 class Map:
@@ -27,6 +64,11 @@ class Map:
 
     def cols(self):
         return len(self.map_string[0])
+
+    def value(self, location: Vector):
+        if not self.out_of_bounds(location):
+            return self.map_string[location.row][location.col]
+        return None
 
     def out_of_bounds(self, point: Vector):
         return point.row < 0 or point.col < 0 or point.row >= len(self.map_string) \
