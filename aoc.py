@@ -1,7 +1,8 @@
 #! python3
+from __future__ import annotations
 
 import os
-from typing import Literal, List
+from typing import Literal
 
 
 class Vector:
@@ -26,7 +27,7 @@ class Vector:
         return Vector(0, -1)
 
     @staticmethod
-    def turn_right(facing):
+    def turn_right(facing) -> Vector:
         if facing == Vector.north():
             return Vector.east()
         elif facing == Vector.east():
@@ -36,51 +37,58 @@ class Vector:
         else:
             return Vector.north()
 
-    def __add__(self, other):
+    @staticmethod
+    def cardinal_directions() -> list[Vector]:
+        return [Vector.north(), Vector.east(), Vector.south(), Vector.west()]
+
+    def __add__(self, other) -> Vector:
         return Vector(self.row + other.row, self.col + other.col)
 
-    def __sub__(self, other):
+    def __sub__(self, other) -> Vector:
         return Vector(self.row - other.row, self.col - other.col)
 
-    def __mul__(self, other):
+    def __mul__(self, other) -> Vector:
         return Vector(self.row * other, self.col * other)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return self.row == other.row and self.col == other.col
-    def __str__(self):
+
+    def __str__(self) -> str:
         return f'[{self.row},{self.col}]'
-    def __repr__(self):
+
+    def __repr__(self) -> str:
         return self.__str__()
-    def __hash__(self):
-        return hash((self.row,self.col))
+
+    def __hash__(self) -> int:
+        return hash((self.row, self.col))
 
 
 class Map:
-    def __init__(self, input):
-        self.map_string: List[str] = input
+    def __init__(self, input: list[str]):
+        self.map_string: list[str] = input[:]
 
-    def rows(self):
+    def rows(self) -> int:
         return len(self.map_string)
 
-    def cols(self):
+    def cols(self) -> int:
         return len(self.map_string[0])
 
-    def value(self, location: Vector):
+    def value(self, location: Vector) -> str | None:
         if not self.out_of_bounds(location):
             return self.map_string[location.row][location.col]
         return None
 
-    def out_of_bounds(self, point: Vector):
+    def out_of_bounds(self, point: Vector) -> bool:
         return point.row < 0 or point.col < 0 or point.row >= len(self.map_string) \
             or point.col >= len(self.map_string[point.row])
 
-    def set_char(self, char, point: Vector):
+    def set_char(self, char, point: Vector) -> None:
         if not self.out_of_bounds(point):
             self.map_string[point.row] = self.map_string[point.row][:point.col] \
                                          + char + self.map_string[point.row][point.col + 1:]
 
-    def find_all(self, char: str):
-        all_occurrences: List[Vector] = []
+    def find_all(self, char: str) -> list[Vector]:
+        all_occurrences: list[Vector] = []
         for row in range(len(self.map_string)):
             all_occurrences += [Vector(row, i) for i in range(len(self.map_string[row])) if
                                 self.map_string[row].startswith(char, i)]
@@ -91,7 +99,7 @@ class AdventOfCode:
     alphanumeric = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     def __init__(self, file):
-        self.input: List[str] = []
+        self.input: list[str] = []
         self.file = file
         self.parse_file()
 
