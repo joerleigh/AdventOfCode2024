@@ -67,6 +67,13 @@ class Map:
     def __init__(self, input: list[str]):
         self.map_string: list[str] = input[:]
 
+    @staticmethod
+    def blank(rows, cols):
+        map_input = []
+        for row in range(rows):
+            map_input.append(''.ljust(cols, '.'))
+        return Map(map_input)
+
     def rows(self) -> int:
         return len(self.map_string)
 
@@ -93,6 +100,10 @@ class Map:
             all_occurrences += [Vector(row, i) for i in range(len(self.map_string[row])) if
                                 self.map_string[row].startswith(char, i)]
         return all_occurrences
+
+    def print(self):
+        for row in self.map_string:
+            print(row)
 
 
 class AdventOfCode:
