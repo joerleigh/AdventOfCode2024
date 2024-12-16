@@ -51,6 +51,8 @@ class Vector:
         return Vector(self.row * other, self.col * other)
 
     def __eq__(self, other) -> bool:
+        if not isinstance(other, Vector):
+            return False
         return self.row == other.row and self.col == other.col
 
     def __str__(self) -> str:
