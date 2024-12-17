@@ -116,13 +116,13 @@ class AdventOfCode:
         self.file = file
         self.parse_file()
 
-    def part_one(self) -> int:
+    def part_one(self):
         pass
 
-    def part_two(self) -> int:
+    def part_two(self):
         pass
 
-    def run(self, part: Literal[1, 2]) -> int | None:
+    def run(self, part: Literal[1, 2]):
         if part == 1:
             return self.part_one()
         elif part == 2:
