@@ -103,6 +103,14 @@ class Map:
                                 self.map_string[row].startswith(char, i)]
         return all_occurrences
 
+    def find_first(self, char: str)->Vector:
+        for row in range(len(self.map_string)):
+            all_occurrences = [Vector(row, i) for i in range(len(self.map_string[row])) if
+                                self.map_string[row].startswith(char, i)]
+            if len(all_occurrences)>0:
+                return all_occurrences[0]
+
+
     def print(self):
         for row in self.map_string:
             print(row)
