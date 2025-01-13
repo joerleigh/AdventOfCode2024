@@ -12,7 +12,7 @@ class Day8(AdventOfCode):
 
     def part_one(self):
         annotated_map = deepcopy(self.input_map)
-        for char in self.alphanumeric:
+        for char in self.ALPHANUMERIC:
             antennas = self.input_map.find_all(char)
             for antenna1 in antennas:
                 for antenna2 in antennas:
@@ -25,7 +25,7 @@ class Day8(AdventOfCode):
 
     def part_two(self):
         annotated_map = deepcopy(self.input_map)
-        for char in self.alphanumeric:
+        for char in self.ALPHANUMERIC:
             antennas = self.input_map.find_all(char)
             for antenna1 in antennas:
                 for antenna2 in antennas:

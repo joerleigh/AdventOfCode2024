@@ -18,10 +18,11 @@ class Day18(AdventOfCode):
         map.print()
 
         path = self.solve_map(map)
-        return len(self.solve_map(map))-1
+        return len(self.solve_map(map)) - 1
 
     def part_two(self):
-        # could have done this smarter by creating a fully connected graph and removing edges as the bytes fall, rather than creating the full graph each time
+        # could have done this smarter by creating a fully connected graph and removing edges as the bytes fall,
+        # rather than creating the full graph each time
         map = Map.blank(self.height, self.width)
         for i in range(len(self.falling_bytes)):
             print(f'Byte {i}')
@@ -30,7 +31,6 @@ class Day18(AdventOfCode):
                 self.solve_map(map)
             except nx.exception.NetworkXNoPath:
                 return self.falling_bytes[i]
-
 
     def solve_map(self, map):
         empties = map.find_all('.')
