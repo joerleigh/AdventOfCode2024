@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import configparser
+import importlib
 import os
 import shutil
 import urllib.request
@@ -32,12 +33,12 @@ def run_day(year: int, day: int, part: Literal[1, 2], use_sample: bool):
     filename = input_filename(year, day, part, use_sample)
 
     modulename = f'{year}.day_{day}'
-    day_module = __import__(modulename)
+    day_module = importlib.import_module(modulename)
 
     try:
         class_name = f'Day{day}'
         class_ = getattr(day_module, class_name)
-        print(f'Loading day {day}, part {part} from {class_name} class')
+        print(f'Loading year {year} day {day}, part {part} from {class_name} class')
         with open(filename) as file:
             day_class: AdventOfCode = class_([line.strip() for line in file.readlines()])
             return day_class.run(part)
