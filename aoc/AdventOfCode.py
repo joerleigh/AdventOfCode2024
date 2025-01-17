@@ -15,41 +15,36 @@ class AdventOfCode:
     def __init__(self, lines: list[str]):
         self.input: list[str] = lines
 
-    def part_one(self):
+    def part_one(self, *args):
         pass
 
-    def part_two(self):
+    def part_two(self, *args):
         pass
 
-    def run(self, part: Literal[1, 2]):
+    def run(self, part: Literal[1, 2], *args):
         if part == 1:
-            return self.part_one()
+            return self.part_one(*args)
         elif part == 2:
-            return self.part_two()
+            return self.part_two(*args)
         return None
 
 
-def run_day(year: int, day: int, part: Literal[1, 2], use_sample: bool):
+def run_day(year: int, day: int, part: Literal[1, 2], use_sample: bool, *args):
     filename = input_filename(year, day, part, use_sample)
 
     modulename = f'{year}.day_{day}'
     day_module = importlib.import_module(modulename)
 
+    class_name = f'Day{day}'
     try:
-        class_name = f'Day{day}'
         class_ = getattr(day_module, class_name)
         print(f'Loading year {year} day {day}, part {part} from {class_name} class')
         with open(filename) as file:
             day_class: AdventOfCode = class_([line.strip() for line in file.readlines()])
-            return day_class.run(part)
+            return day_class.run(part, *args)
 
     except AttributeError:
-        print(f'Loading day {day}, part {part} from {modulename} module')
-        with open(filename) as file:
-            if part == 1:
-                print(day_module.part_one(file))
-            elif part == 2:
-                print(day_module.part_two(file))
+        print(f'Class {class_name} not found in module {modulename}')
 
 
 def input_filename(year, day, part=1, use_sample=False):
@@ -88,6 +83,7 @@ def download_day(year, day):
     # create an empty sample file, too
     filename = input_filename(year, day, use_sample=True)
     open(filename, 'a').close()
+
 
 def template_day(year, day):
     filename = code_filename(year, day)

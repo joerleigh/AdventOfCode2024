@@ -11,6 +11,7 @@ if __name__ == '__main__':
     parser.add_argument('-s', '--sample', action='store_true')
     parser.add_argument('--download', action='store_true')
     parser.add_argument('--template', action='store_true')
+    parser.add_argument('args', nargs=argparse.REMAINDER)
     args = parser.parse_args()
 
     if args.download:
@@ -18,4 +19,4 @@ if __name__ == '__main__':
     if args.template:
         template_day(args.year, args.day)
     if not args.download and not args.template:
-        run_day(args.year, args.day, args.part, args.sample)
+        run_day(args.year, args.day, args.part, args.sample, *args.args)
