@@ -36,15 +36,11 @@ def run_day(year: int, day: int, part: Literal[1, 2], use_sample: bool, *args):
     day_module = importlib.import_module(modulename)
 
     class_name = f'Day{day}'
-    try:
-        class_ = getattr(day_module, class_name)
-        print(f'Loading year {year} day {day}, part {part} from {class_name} class')
-        with open(filename) as file:
-            day_class: AdventOfCode = class_([line.strip() for line in file.readlines()])
-            return day_class.run(part, *args)
-
-    except AttributeError:
-        print(f'Class {class_name} not found in module {modulename}')
+    class_ = getattr(day_module, class_name)
+    print(f'Loading year {year} day {day}, part {part} from {class_name} class')
+    with open(filename) as file:
+        day_class: AdventOfCode = class_([line.strip() for line in file.readlines()])
+        return day_class.run(part, *args)
 
 
 def input_filename(year, day, part=1, use_sample=False):
