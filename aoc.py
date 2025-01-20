@@ -1,5 +1,6 @@
 #! python3
 import argparse
+import time
 
 from aoc import run_day, download_day, template_day
 
@@ -19,4 +20,15 @@ if __name__ == '__main__':
     if args.template:
         template_day(args.year, args.day)
     if not args.download and not args.template:
+        start_time = time.perf_counter_ns()
         run_day(args.year, args.day, args.part, args.sample, *args.args)
+        end_time = time.perf_counter_ns()
+        elapsed_nanoseconds = end_time-start_time
+        elapsed = f"{elapsed_nanoseconds} ns"
+        if elapsed_nanoseconds / 1000 > 1:
+            elapsed = f"{elapsed_nanoseconds/1000:.1f}µs"
+        if elapsed_nanoseconds / 1000000 > 1:
+            elapsed = f"{elapsed_nanoseconds/1000000:.1f}ms"
+        if elapsed_nanoseconds / 1000000000 > 1:
+            elapsed = f"{elapsed_nanoseconds / 1000000000:.1f}s"
+        print(f"Solved in {elapsed}")
