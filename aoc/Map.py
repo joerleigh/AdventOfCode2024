@@ -1,8 +1,9 @@
-from aoc import Vector
+from .Vector import Vector
 
 COLOR_RED = "\033[91m"
 COLOR_GREEN = "\033[92m"
 COLOR_NORMAL = "\033[0m"
+
 
 class Map:
     def __init__(self, input: list[str]):
@@ -54,6 +55,15 @@ class Map:
         for x in range(self.cols()):
             for y in range(self.rows()):
                 yield x, y
+
+    def all_points(self):
+        for x in range(self.cols()):
+            for y in range(self.rows()):
+                yield Vector(y, x)
+
+    def neighbors8(self, point: Vector):
+        movements = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]
+        return [self.value(Vector(*movement) + point) for movement in movements]
 
     def set_cell_color(self, v, color):
         self.colors[v] = color
