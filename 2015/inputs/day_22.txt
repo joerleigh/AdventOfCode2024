@@ -1,0 +1,4 @@
+Hit Points: 58
+Damage: 9
+Hit Points: 50
+Mana: 500
