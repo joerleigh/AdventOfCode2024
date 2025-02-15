@@ -34,6 +34,17 @@ class Vector:
             return cls.north()
 
     @classmethod
+    def turn_left(cls, facing) -> Vector:
+        if facing == cls.north():
+            return cls.west()
+        elif facing == cls.east():
+            return cls.north()
+        elif facing == cls.south():
+            return cls.east()
+        else:
+            return cls.south()
+
+    @classmethod
     def cardinal_directions(cls) -> list[Vector]:
         return [cls.north(), cls.east(), cls.south(), cls.west()]
 
